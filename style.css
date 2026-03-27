@@ -1,0 +1,545 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700&display=swap');
+
+:root {
+    --primary: #4f46e5;
+    --primary-glow: rgba(79, 70, 229, 0.4);
+    --bg: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: rgba(226, 232, 240, 0.5);
+    --glass-blur: 12px;
+    --cat-bg: #f1f5f9;
+    --cat-active: #4f46e5;
+    --cat-active-text: #ffffff;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Malgun Gothic', sans-serif;
+}
+
+body {
+    background: var(--bg);
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(243, 75%, 85%, 1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225, 39%, 95%, 1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(339, 49%, 95%, 1) 0, transparent 50%);
+    min-height: 100vh;
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* Header & Navigation */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1.5rem 5%;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hero Section */
+.hero {
+    padding: 4rem 5% 2rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Filter Section */
+.filter-container {
+    padding: 0 5% 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    color: var(--text-muted);
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.filter-btn.active {
+    background: var(--cat-active);
+    color: var(--cat-active-text);
+    border-color: var(--cat-active);
+    box-shadow: 0 8px 16px var(--primary-glow);
+}
+
+/* Restaurant Grid */
+.restaurant-grid {
+    padding: 0 5% 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    min-height: 400px;
+}
+
+.restaurant-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.restaurant-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary);
+}
+
+.category-tags {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.menu-list {
+    list-style: none;
+    flex: 1;
+    overflow: hidden;
+    max-height: 1000px; /* Expands by default */
+    transition: max-height 0.4s ease-in-out;
+}
+
+.menu-list.collapsed {
+    max-height: 200px; /* Shows about 5 items */
+    position: relative;
+}
+
+/* Add a fade out effect for collapsed menus */
+.menu-list.collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+}
+
+.toggle-menu-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.toggle-menu-btn:hover {
+    text-decoration: underline;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.95rem;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+/* Suggest Button & Modal */
+.floating-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1.2rem 2rem;
+    border-radius: 50px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px var(--primary-glow);
+    transition: var(--transition);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.floating-btn:hover {
+    transform: rotate(-2deg) scale(1.1);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 32px;
+    width: 95%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    font-size: 1rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 2px solid #f1f5f9;
+    background: #f8fafc;
+    border-radius: 16px;
+    outline: none;
+    font-size: 1rem;
+    transition: var(--transition);
+    color: var(--text-main);
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* Price Range Slider UI */
+.price-filter-container {
+    padding: 1.5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* Dual Range Slider styling */
+.multi-range-container {
+    position: relative;
+    height: 40px;
+}
+
+.range-input {
+    position: relative;
+}
+
+.range-input input {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.range-input input::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+.slider-track {
+    width: 100%;
+    height: 6px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+/* Category Checkbox UI */
+.category-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.cat-check-item {
+    position: relative;
+}
+
+.cat-check-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.cat-check-label {
+    display: inline-block;
+    padding: 0.6rem 1.1rem;
+    background: #f1f5f9;
+    color: #64748b;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.cat-check-item input:checked + .cat-check-label {
+    background: #eff6ff;
+    color: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+/* Dynamic Menu Inputs */
+.menu-input-row {
+    display: grid;
+    grid-template-columns: 1fr 120px 40px;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    align-items: center;
+}
+
+.menu-price:disabled {
+    background: #f1f5f9;
+    color: #cbd5e1;
+    cursor: not-allowed;
+    border-color: #f1f5f9;
+    opacity: 0.6;
+}
+
+/* Suggest Menu Button on Cards */
+.suggest-menu-btn {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    border-radius: 14px;
+    background: white;
+    color: var(--primary);
+    border: 2px dashed var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.suggest-menu-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-style: solid;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.remove-menu-btn {
+    background: #fee2e2;
+    color: #ef4444;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.add-menu-row-btn {
+    background: white;
+    color: var(--primary);
+    border: 2px dashed var(--primary);
+    padding: 0.8rem;
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    transition: var(--transition);
+}
+
+.add-menu-row-btn:hover {
+    background: #f5f3ff;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+/* Animations and Responsive */
+@media (max-width: 768px) {
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+        padding: 0 5% 3rem;
+        gap: 1.2rem;
+    }
+    .hero {
+        padding: 2rem 5% 1.5rem;
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 0.95rem;
+    }
+    .filter-btn {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
+    }
+    .price-filter-container {
+        padding: 1.2rem;
+        border-radius: 20px;
+    }
+    .floating-btn {
+        bottom: 1.5rem;
+        right: 1rem;
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+        border-radius: 30px;
+    }
+    .restaurant-card {
+        padding: 1.5rem;
+        border-radius: 18px;
+    }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여의도 맛집 가이드 | 실시간 여의도 식당 정보</title>
+    <meta name="description" content="서울 여의도 지역의 다양한 식당 정보를 한눈에 확인하세요. 카테고리별 필터와 메뉴 정보를 제공합니다.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Yeouido Foodie</div>
+        <nav>
+            <a href="#" class="nav-link" id="homeLink" style="text-decoration: none; font-weight: 600; color: var(--primary);">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>오늘 뭐 먹지? 여의도.</h1>
+            <p>여의도 직장인과 방문객을 위한 최고의 식당 가이드. 정갈한 한식부터 특별한 양식까지 원하는 카테고리를 골라보세요.</p>
+        </section>
+
+        <section class="filter-area">
+            <div class="filter-container" id="filterContainer">
+                <!-- JavaScript will populate categories here -->
+            </div>
+            
+            <div class="price-filter-container">
+                <div class="slider-header" style="margin-bottom: 0.5rem;">
+                    <span>가격 범위 설정</span>
+                    <strong id="priceDisplay" style="color: var(--primary);">0원 ~ 100,000원+</strong>
+                </div>
+                <div class="multi-range-container">
+                    <div class="slider-track" id="sliderTrack"></div>
+                    <div class="range-input">
+                        <input type="range" class="min-range" min="0" max="100000" value="0" step="1000">
+                        <input type="range" class="max-range" min="0" max="100000" value="100000" step="1000">
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">
+                    * 위 범위 내의 메뉴가 있는 식당들이 표시됩니다.
+                </p>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <span id="resultsCount" style="background: var(--surface); padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 600; color: var(--primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.2);">검색된 식당: 0개</span>
+        </div>
+
+        <section class="restaurant-grid" id="restaurantGrid">
+            <!-- JavaScript will populate restaurant cards here -->
+        </section>
+    </main>
+
+    <button id="openSuggestModal" class="floating-btn">
+        <span>+</span> 식당 제안하기
+    </button>
+
+    <!-- Modal for suggesting restaurants -->
+    <div class="modal" id="suggestModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 style="margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">식당 제안하기</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
+                알고 계신 맛집을 알려주세요! 관리자 승인 후 즉시 반영됩니다.
+            </p>
+            
+            <form id="suggestForm">
+                <div class="form-group">
+                    <label for="restaurantName">식당 이름</label>
+                    <input type="text" id="restaurantName" name="name" placeholder="예: 여의도 칼국수" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 2.5rem;">
+                    <label>카테고리 (중복 선택 가능)</label>
+                    <div id="modalCategories" class="category-selector">
+                        <!-- JavaScript will populate category buttons here -->
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">식당 제안하기</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for suggesting ONLY menus to existing restaurants -->
+    <div class="modal" id="menuModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeMenuModal">&times;</span>
+            <h2 id="menuModalTitle" style="margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">메뉴 제안</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
+                아직 등록되지 않은 맛있는 메뉴 정보를 알려주세요!
+            </p>
+            
+            <form id="menuSuggestForm">
+                <input type="hidden" id="targetRestaurant" name="target">
+                <div class="form-group">
+                    <label for="newMenuName">메뉴명</label>
+                    <input type="text" id="newMenuName" name="menuName" placeholder="예: 콩국수" required>
+                </div>
+                <div class="form-group">
+                    <label for="newMenuPrice">가격 (원)</label>
+                    <input type="text" id="newMenuPrice" name="menuPrice" placeholder="예: 12000" required>
+                </div>
+                <button type="submit" class="submit-btn" id="menuSubmitBtn">메뉴 제안하기</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
