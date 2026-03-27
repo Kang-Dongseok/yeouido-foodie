@@ -21,7 +21,7 @@ const initialRestaurants = [
     ]
   },
   {
-    "name": "가양칼국스버섯매운탕",
+    "name": "가양칼국수버섯매운탕",
     "categories": [
       "한식",
       "면요리"
@@ -137,12 +137,17 @@ const initialRestaurants = [
   {
     "name": "바스버거 여의도점",
     "categories": [
+      "양식",
       "패스트푸드"
     ],
     "menus": [
       {
         "name": "바스버거",
-        "price": 12500
+        "price": 7777
+      },
+      {
+        "name": "치킨버거",
+        "price": 8900
       }
     ]
   }

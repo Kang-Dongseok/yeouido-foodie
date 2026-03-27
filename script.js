@@ -2,7 +2,7 @@
  * [구글 시트 연동 URL]
  * 본인의 Google Apps Script 배포 URL을 아래 따옴표 사이에 넣으세요.
  */
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxAhY853RX00MnNs1zo4obwI2vHfi0rb3_1-PJI5LUrSqx5e4mhdKYJlEOODoq6ZYzd/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbzwgyfys_-4DQnzVHn_MQ0gn9N6sF0kp8RS4X4wbEXZt0jXrS55L47ckjbTsR-sQlXq/exec";
 
 document.addEventListener('DOMContentLoaded', () => {
     // '전체'를 맨 앞에 추가
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let filtered = restaurants.filter(res => {
             const catMatch = activeFilters.size === 0 || res.categories.some(c => activeFilters.has(c));
-            const priceMatch = res.menus.some(m => {
+            const priceMatch = res.menus.length === 0 || res.menus.some(m => {
                 const p = m.price || 0;
                 // If max slider is at 100k, we don't cap the upper bound
                 return p >= minPriceVal && (maxPriceVal === 100000 ? true : p <= maxPriceVal);
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${menuHtml}
                 </ul>
                 ${hasManyMenus ? `<button class="toggle-menu-btn" onclick="toggleMenu('${menuListId}', this)">+ 메뉴 더 보기</button>` : ''}
-                <button class="suggest-menu-btn" onclick="openMenuModal('${res.name}')">+ 새로운 메뉴 제안</button>
+                <button class="suggest-menu-btn" onclick="openMenuModal('${res.name}')">+ 메뉴 추가 제안</button>
             `;
             restaurantGrid.appendChild(card);
         });
